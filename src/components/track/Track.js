@@ -2,15 +2,15 @@ import React from 'react';
 import './Track.css';
 
 class Track extends React.Component {
-  render() {
-    renderAction() {
-      if (this.props.isRemoval) {
-        return '-';
-      } else {
-        return '+';
-      }
+  renderAction() {
+    if (this.props.isRemoval) {
+      return '-';
+    } else {
+      return '+';
     }
-    
+  }
+
+  render() {
     return (
       <div className="Track">
         <div className="Track-information">
