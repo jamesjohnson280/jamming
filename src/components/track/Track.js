@@ -3,6 +3,14 @@ import './Track.css';
 
 class Track extends React.Component {
   render() {
+    renderAction() {
+      if (this.props.isRemoval) {
+        return '-';
+      } else {
+        return '+';
+      }
+    }
+    
     return (
       <div className="Track">
         <div className="Track-information">
