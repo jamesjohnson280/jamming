@@ -14,4 +14,4 @@ class SearchResults extends React.Component {
   }
 }
 
-export default SearchResults;a
+export default SearchResults;
