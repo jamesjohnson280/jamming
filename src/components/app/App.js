@@ -56,6 +56,19 @@ class App extends React.Component {
       playlistName: MOCK_PLAYLIST_NAME,
       playlistTracks: MOCK_PLAYLIST
     };
+
+    this.addTrack = this.addTrack.bind(this);
+  }
+
+  addTrack(track) {
+    const tracks = this.state.playlistTracks;
+    if (!tracks.includes({id: track.id})) {
+      tracks.push(track);
+      this.setState({
+        playlistTracks: tracks
+      });
+    }
+    console.log(this.state.playlistTracks);
   }
 
   render() {
@@ -65,8 +78,8 @@ class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults}/>
-            <Playlist />
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.onAdd}/>
+            <Playlist name={this.state.playlistName} tracks={this.state.playlistTracks}/>
           </div>
         </div>
       </div>
