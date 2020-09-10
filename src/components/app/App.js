@@ -25,11 +25,36 @@ const MOCK_RESULTS = [
   }
 ];
 
+const MOCK_PLAYLIST_NAME = 'Jim\'s Funky Playlist';
+
+const MOCK_PLAYLIST = [
+  {
+    id: 1,
+    name: 'March of the Pigs',
+    artist: 'Nine Inch Nails',
+    album: 'The Downward Spiral'
+  },
+  {
+    id: 2,
+    name: 'Closer',
+    artist: 'Nine Inch Nails',
+    album: 'The Downward Spiral'
+  },
+  {
+    id: 3,
+    name: 'Erase Me',
+    artist: 'Nine Inch Nails',
+    album: 'The Downward Spiral'
+  }
+];
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: MOCK_RESULTS
+      searchResults: MOCK_RESULTS,
+      playlistName: MOCK_PLAYLIST_NAME,
+      playlistTracks: MOCK_PLAYLIST
     };
   }
 
