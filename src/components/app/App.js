@@ -25,12 +25,49 @@ const MOCK_RESULTS = [
   }
 ];
 
+const MOCK_PLAYLIST_NAME = 'Jim\'s Funky Playlist';
+
+const MOCK_PLAYLIST = [
+  {
+    id: 1,
+    name: 'March of the Pigs',
+    artist: 'Nine Inch Nails',
+    album: 'The Downward Spiral'
+  }
+];
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: MOCK_RESULTS
+      searchResults: MOCK_RESULTS,
+      playlistName: MOCK_PLAYLIST_NAME,
+      playlistTracks: MOCK_PLAYLIST
     };
+
+    this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+  }
+
+  addTrack(track) {
+    const tracks = this.state.playlistTracks;
+    if (!tracks.find(t => t.id === track.id)) {
+      tracks.push(track);
+      this.setState({
+        playlistTracks: tracks
+      })
+    }
+  }
+
+  removeTrack(track) {
+    const tracks = this.state.playlistTracks;
+    const index = tracks.findIndex(t => t.id === track.id);
+    if (index !== -1) {
+      tracks.splice(index, 1);
+      this.setState({
+        playlistTracks: tracks
+      });
+    }
   }
 
   render() {
@@ -40,8 +77,11 @@ class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults}/>
-            <Playlist />
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
+            <Playlist name={this.state.playlistName} 
+              tracks={this.state.playlistTracks} 
+              onAdd={this.addTrack}
+              onRemove={this.removeTrack}/>
           </div>
         </div>
       </div>
