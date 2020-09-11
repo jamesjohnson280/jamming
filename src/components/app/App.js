@@ -33,18 +33,6 @@ const MOCK_PLAYLIST = [
     name: 'March of the Pigs',
     artist: 'Nine Inch Nails',
     album: 'The Downward Spiral'
-  },
-  {
-    id: 2,
-    name: 'Closer',
-    artist: 'Nine Inch Nails',
-    album: 'The Downward Spiral'
-  },
-  {
-    id: 3,
-    name: 'Erase Me',
-    artist: 'Nine Inch Nails',
-    album: 'The Downward Spiral'
   }
 ];
 
