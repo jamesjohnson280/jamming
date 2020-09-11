@@ -54,6 +54,17 @@ class App extends React.Component {
       tracks.push(track);
       this.setState({
         playlistTracks: tracks
+      })
+    }
+  }
+
+  removeTrack(track) {
+    const tracks = this.state.playlistTracks;
+    const index = tracks.findIndex(t => t.id === track.id);
+    if (index !== -1) {
+      tracks.splice(index, 1);
+      this.setState({
+        playlistTracks: tracks
       });
     }
   }
