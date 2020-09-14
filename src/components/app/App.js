@@ -62,6 +62,7 @@ class App extends React.Component {
 
   updatePlaylistName(name) {
     if (name === this.state.playlistName) { return; }
+    console.log('new name', name);
     this.setState({
       playlistName: name
     });
