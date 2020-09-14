@@ -78,14 +78,14 @@ class App extends React.Component {
         playlistTracks: tracks
       });
     }
-
-    savePlaylist() {
-      const trackURIs = [];
-      for (let track of this.state.playlistTracks) {
-        trackURIs.push(`spotify:track:${track.id}`);
-      }
-      return trackURIs;
+  }
+  
+  savePlaylist() {
+    const trackURIs = [];
+    for (let track of this.state.playlistTracks) {
+      trackURIs.push(`spotify:track:${track.id}`);
     }
+    return trackURIs;
   }
 
   render() {
