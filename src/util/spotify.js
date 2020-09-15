@@ -1,3 +1,5 @@
+import SearchBar from "../components/search-bar/SearchBar";
+
 let accessToken = undefined;
 const redirectURL = 'http://localhost:3000/';
 const clientID = 'bf460d4fa8b34901b82fcc312dbe1059';
@@ -16,6 +18,27 @@ const Spotify = {
       const url = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURL}`;
       window.location.href = url;
     }
+  },
+  search(term) {
+    const url = `https://api.spotify.com/v1/search?type=track&q=${term}`;
+    return fetch(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (!data) { return [] }
+      else { data.map(track => {
+        return {
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0],
+          album: track.album.name,
+          uri: track.uri
+        }
+      })}
+    });
   }
 };
 
