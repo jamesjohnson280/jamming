@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from '../search-bar/SearchBar';
 import SearchResults from '../search-results/SearchResults';
 import Playlist from '../playlist/Playlist';
+import Spotify from '../../util/spotify/Spotify';
 import './App.css';
 
 const MOCK_RESULTS = [      
@@ -91,6 +92,10 @@ class App extends React.Component {
 
   search(term) {
     console.log('search term:', term);
+    const results = Spotify.search(term);
+    this.setState({
+      searchResults: results
+    });
   }
 
   render() {
