@@ -24,10 +24,19 @@ export const Spotify = {
         Authorization: `Bearer ${accessToken}`
       }
     })
-    .then(response => response.json())
+    .then(response => {
+      if (response) {
+        return response.json();
+      } else {
+        console.log(response);
+      }
+    })
     .then(data => {
+      console.log('data', data);
       if (!data) { return [] }
-      else { data.map(track => {
+      if (!Array.isArray(data)) {
+        console.log(data);
+      } else { data.map(track => {
         return {
           id: track.id,
           name: track.name,
