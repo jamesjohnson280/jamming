@@ -2,7 +2,7 @@ let accessToken = undefined;
 const redirectURL = 'http://localhost:3000/';
 const clientID = 'bf460d4fa8b34901b82fcc312dbe1059';
 
-const Spotify = {
+export const Spotify = {
   getAccessToken() {
     if (accessToken) { return accessToken; }
     const url = window.location.href;
@@ -39,5 +39,3 @@ const Spotify = {
     });
   }
 };
-
-export default Spotify;
