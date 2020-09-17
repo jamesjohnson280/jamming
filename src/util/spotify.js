@@ -17,10 +17,10 @@ export const Spotify = {
       window.location.href = url;
     }
   },
-  search(term) {
+ async search(term) {
     const url = `https://api.spotify.com/v1/search?type=track&q=${term}`;
     const token = this.getAccessToken();
-    return fetch(url, {
+    return await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -37,14 +37,15 @@ export const Spotify = {
       if (!data) { return [] }
       if (!Array.isArray(data)) {
         console.log(data);
-      } else { data.map(track => {
-        return {
-          id: track.id,
-          name: track.name,
-          artist: track.artists[0],
-          album: track.album.name,
-          uri: track.uri
-        }
+      } else { 
+        return data.map(track => {
+          return {
+            id: track.id,
+            name: track.name,
+            artist: track.artists[0],
+            album: track.album.name,
+            uri: track.uri
+          }
       })}
     });
   },

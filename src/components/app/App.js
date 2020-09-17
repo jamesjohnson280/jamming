@@ -65,7 +65,6 @@ class App extends React.Component {
 
   updatePlaylistName(name) {
     if (name === this.state.playlistName) { return; }
-    console.log('new name', name);
     this.setState({
       playlistName: name
     });
@@ -91,8 +90,8 @@ class App extends React.Component {
   }
 
   search(term) {
-    console.log('search term:', term);
     const results = Spotify.search(term);
+    console.log('results', results);
     this.setState({
       searchResults: results
     });
