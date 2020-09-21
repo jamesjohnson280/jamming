@@ -6,18 +6,23 @@ export const Spotify = {
   getAccessToken() {
     if (accessToken) { return accessToken; }
     const url = window.location.href;
-    let token = url.match('/access_token=([^&]*)/');
-    const expires = url.match('/expires_in=([^&]*)/');
+    console.log('url', url);
+    let token = window.location.href.match(/access_token=([^&]*)/);
+    console.log('token', token);
+    const expires = window.location.href.match(/expires_in=([^&]*)/);
     if (token && expires) {
-      accessToken = token;
-      window.setTimeout(() => accessToken = '', expires * 1000);
+      accessToken = token[1];
+      console.log('token', token[1]);
+      window.setTimeout(() => accessToken = '', expires[1] * 1000);
       window.history.pushState('Access Token', null, '/');
+      return accessToken;
     } else {
       const url = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURL}`;
-      window.location.href = url;
+      window.location = url;
     }
   },
  async search(term) {
+   console.log('term', term);
     const url = `https://api.spotify.com/v1/search?type=track&q=${term}`;
     const token = this.getAccessToken();
     return await fetch(url, {
@@ -33,16 +38,16 @@ export const Spotify = {
       }
     })
     .then(data => {
-      console.log('data', data);
-      if (!data) { return [] }
-      if (!Array.isArray(data)) {
-        console.log(data);
+      console.log('data', data.tracks);
+      if (!data.tracks) { return [] }
+      if (!Array.isArray(data.tracks.items)) {
+        console.log('error', data.error.message);
       } else { 
-        return data.map(track => {
+        return data.tracks.items.map(track => {
           return {
             id: track.id,
             name: track.name,
-            artist: track.artists[0],
+            artist: track.artists[0].name,
             album: track.album.name,
             uri: track.uri
           }

@@ -41,7 +41,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: MOCK_RESULTS,
+      searchResults: [],
       playlistName: MOCK_PLAYLIST_NAME,
       playlistTracks: MOCK_PLAYLIST
     };
@@ -90,10 +90,12 @@ class App extends React.Component {
   }
 
   search(term) {
-    const results = Spotify.search(term);
-    console.log('results', results);
-    this.setState({
-      searchResults: results
+    Spotify.search(term)
+    .then(results => {
+      console.log('results', results[0]);
+      this.setState({
+        searchResults: results
+      });
     });
   }
 
