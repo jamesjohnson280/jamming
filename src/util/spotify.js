@@ -6,13 +6,10 @@ export const Spotify = {
   getAccessToken() {
     if (accessToken) { return accessToken; }
     const url = window.location.href;
-    console.log('url', url);
-    let token = window.location.href.match(/access_token=([^&]*)/);
-    console.log('token', token);
-    const expires = window.location.href.match(/expires_in=([^&]*)/);
+    let token = url.match(/access_token=([^&]*)/);
+    const expires = url.match(/expires_in=([^&]*)/);
     if (token && expires) {
       accessToken = token[1];
-      console.log('token', token[1]);
       window.setTimeout(() => accessToken = '', expires[1] * 1000);
       window.history.pushState('Access Token', null, '/');
       return accessToken;
