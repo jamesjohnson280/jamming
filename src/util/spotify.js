@@ -67,7 +67,7 @@ export const Spotify = {
       })
       .then(data => {
         userID = data.id;
-        const plURL = `	/v1/users/${userID}/playlists`;
+        const plURL = `https://api.spotify.com/v1/users/${userID}/playlists`;
         return fetch(plURL, {
           headers: headers,
           method: 'POST',
