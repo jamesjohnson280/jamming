@@ -5,26 +5,26 @@ import Playlist from '../playlist/Playlist';
 import { Spotify } from '../../util/spotify';
 import './App.css';
 
-const MOCK_RESULTS = [      
-  {
-    id: 1,
-    name: 'March of the Pigs',
-    artist: 'Nine Inch Nails',
-    album: 'The Downward Spiral'
-  },
-  {
-    id: 2,
-    name: 'Closer',
-    artist: 'Nine Inch Nails',
-    album: 'The Downward Spiral'
-  },
-  {
-    id: 3,
-    name: 'Erase Me',
-    artist: 'Nine Inch Nails',
-    album: 'The Downward Spiral'
-  }
-];
+// const MOCK_RESULTS = [      
+//   {
+//     id: 1,
+//     name: 'March of the Pigs',
+//     artist: 'Nine Inch Nails',
+//     album: 'The Downward Spiral'
+//   },
+//   {
+//     id: 2,
+//     name: 'Closer',
+//     artist: 'Nine Inch Nails',
+//     album: 'The Downward Spiral'
+//   },
+//   {
+//     id: 3,
+//     name: 'Erase Me',
+//     artist: 'Nine Inch Nails',
+//     album: 'The Downward Spiral'
+//   }
+// ];
 
 const MOCK_PLAYLIST_NAME = 'Jim\'s Funky Playlist';
 
@@ -92,7 +92,6 @@ class App extends React.Component {
   search(term) {
     Spotify.search(term)
     .then(results => {
-      console.log('results', results[0]);
       this.setState({
         searchResults: results
       });
