@@ -18,11 +18,10 @@ export const Spotify = {
       window.location = url;
     }
   },
- async search(term) {
-   console.log('term', term);
+ search(term) {
     const url = `https://api.spotify.com/v1/search?type=track&q=${term}`;
     const token = this.getAccessToken();
-    return await fetch(url, {
+    return fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -31,14 +30,13 @@ export const Spotify = {
       if (response) {
         return response.json();
       } else {
-        console.log(response);
+        console.log("Error: No search response");
       }
     })
     .then(data => {
-      console.log('data', data.tracks);
       if (!data.tracks) { return [] }
       if (!Array.isArray(data.tracks.items)) {
-        console.log('error', data.error.message);
+        console.log('Error:', data.error.message);
       } else { 
         return data.tracks.items.map(track => {
           return {
