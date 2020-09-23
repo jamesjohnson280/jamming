@@ -50,33 +50,40 @@ export const Spotify = {
     });
   },
   async savePlaylist(name, tracks) {
-    if (!name || !tracks) { return; }
+    if (!name || !tracks.length) { return; }
     const headers = { 
       Authorization: `Bearer ${accessToken}`,
-      'Content-type': 'application-json'
+      'Content-type': 'application/json'
     };
     let userID = '';
-    let playlistID = '';
     const url = 'https://api.spotify.com/v1/me';
-    await fetch(url, { headers: headers })
+    return fetch(url, { headers: headers })
       .then(response => {
         if (response) {
           return response.json();
         } else {
-          console.log(response);
+          console.log("Error: No playlist response");
         }
       })
       .then(data => {
         userID = data.id;
+        const plURL = `	/v1/users/${userID}/playlists`;
+        return fetch(plURL, {
+          headers: headers,
+          method: 'POST',
+          body: JSON.stringify({ name: name })
+        })
+        .then(request => {
+          return request.json();
+        })
+        .then(data => { 
+          const playlistID = data.id;
+          return fetch(`https://api.spotify.com/v1/users/${userID}/playlists/${playlistID}/tracks`, {
+            headers: headers,
+            method: 'POST',
+            body: JSON.stringify({uris: tracks})
+          });
+        });
       });
-    const plURL = `	/v1/users/${userID}/playlists`;
-    await fetch(plURL, {
-      headers: headers,
-      body: JSON.stringify({ name: name })
-    })
-    .then(request => {
-      return request.json();
-    })
-    .then(data => { playlistID = data.id; });
   }
 };
