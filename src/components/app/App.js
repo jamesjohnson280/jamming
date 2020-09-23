@@ -5,45 +5,13 @@ import Playlist from '../playlist/Playlist';
 import { Spotify } from '../../util/spotify';
 import './App.css';
 
-// const MOCK_RESULTS = [      
-//   {
-//     id: 1,
-//     name: 'March of the Pigs',
-//     artist: 'Nine Inch Nails',
-//     album: 'The Downward Spiral'
-//   },
-//   {
-//     id: 2,
-//     name: 'Closer',
-//     artist: 'Nine Inch Nails',
-//     album: 'The Downward Spiral'
-//   },
-//   {
-//     id: 3,
-//     name: 'Erase Me',
-//     artist: 'Nine Inch Nails',
-//     album: 'The Downward Spiral'
-//   }
-// ];
-
-const MOCK_PLAYLIST_NAME = 'Jim\'s Funky Playlist';
-
-const MOCK_PLAYLIST = [
-  {
-    id: 1,
-    name: 'March of the Pigs',
-    artist: 'Nine Inch Nails',
-    album: 'The Downward Spiral'
-  }
-];
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchResults: [],
-      playlistName: MOCK_PLAYLIST_NAME,
-      playlistTracks: MOCK_PLAYLIST
+      playlistName: 'New Playlist',
+      playlistTracks: []
     };
 
     this.addTrack = this.addTrack.bind(this);
